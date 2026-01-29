@@ -54,4 +54,41 @@ def stations_by_river(stations, x = False):
             tempstations.sort()
         riverstations[allrivers[i]] = tempstations
     return riverstations
+
+
+
+def rivers_by_station_number(stations, N):
+    riverName = []
+    for i in range(len(stations)):
+        current_river = stations[i].river
+
+        exists = True
+        for j in range(len(riverName)):
+            if riverName[j] == current_river:
+                exists = True
+                break
+        
+        if not exists:
+            riverName.append(current_river)
+
+
+    stationCount = []
+    for j in range(len(riverName)):
+        numStations = 0
+        for e in range(len(stations)):
+            if riverName[j] == stations[e].rivers:
+                numStations += 1
+        
+        stationCount.append(riverName[j], numStations)
+
+    stationCount.sort(key=lambda x: x[1], reverse=True)
+    
+    return stationCount[:N]
+
+    
+   
+    
+                
+
+        
         
