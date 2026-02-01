@@ -19,7 +19,10 @@ def stations_by_distance(stations, p , minimise=False):
             stationdistance.append((stations[i], distance))
         else:
             stationdistance.append((stations[i].name, stations[i].town, distance))
-    return sorted_by_key(stationdistance, 2)
+    if minimise == False:
+        return sorted_by_key(stationdistance, 1)
+    else:
+        return sorted_by_key(stationdistance, 2)
 
 
 def stations_within_radius(stations, centre, r):
