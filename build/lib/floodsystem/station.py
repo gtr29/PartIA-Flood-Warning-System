@@ -39,3 +39,49 @@ class MonitoringStation:
         d += "   river:         {}\n".format(self.river)
         d += "   typical range: {}".format(self.typical_range)
         return d
+
+
+    def typical_range_consistent(self):
+        # Check if data is missing (inconsistent)
+        if self.typical_range is None:
+            return False
+            
+        # Access individual values
+        low = self.typical_range[0]
+        high = self.typical_range[1]
+        
+        # Check if high is less than low (inconsistent)
+        if high < low:
+            return False
+            
+        # If both checks pass, it's consistent
+        return True
+
+
+    def relative_water_level(self):
+        """Returns the latest water level as a fraction of the typical range, where 0 corresponds to the typical low and 1 corresponds to the typical high. If the data is inconsistent or unavailable, returns None."""
+        if self.typical_range is None:
+            return None
+        if self.latest_level is None:
+            return None
+        if self.typical_range_consistent() == False:
+            return None
+        low = self.typical_range[0]
+        high = self.typical_range[1]
+        return (self.latest_level - low) / (high - low)
+        
+
+    
+
+
+
+def inconsistent_typical_range_stations(stations):
+    #empty list to hold failed stations
+    failedStations = []
+
+    #iterating through all stations
+    for station in stations:
+        if station.typical_range_consistent() == False:
+            failedStations.append(station)
+
+    return failedStations

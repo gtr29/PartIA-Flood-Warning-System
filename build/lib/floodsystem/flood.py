@@ -11,7 +11,7 @@ def stations_level_over_threshold(stations, tol):
 
 
 def stations_highest_rel_level(stations, N):
-    """Takes list of station objects and returns the N stations with highest relative water levels as a list of tuples"""
+    """Takes list of statio objects and returns the N stations with highest relative water levels as a list of tuples"""
     full = []
     for i in range(len(stations)):
         if stations[i].relative_water_level() is not None:
